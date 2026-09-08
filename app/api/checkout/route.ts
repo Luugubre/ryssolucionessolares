@@ -14,7 +14,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'No se recibieron los items del carrito' }, { status: 400 })
     }
 
-    // Obtenemos el origen de forma segura con un respaldo si viene nulo
     const host = request.headers.get('host') || 'localhost:3000'
     const protocol = host.includes('localhost') ? 'http' : 'https'
     const origin = request.headers.get('origin') || `${protocol}://${host}`
