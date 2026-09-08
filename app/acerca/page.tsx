@@ -2,20 +2,20 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import { 
   ArrowRight, FileText, Leaf, Coins, BarChart3, Trophy, SunMedium, Users, Home, Building2, Factory, ShieldCheck
 } from 'lucide-react'
 
 // Configuraciones de animación
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+  visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
 }
 
 export default function AcercaPage() {
