@@ -3,10 +3,13 @@ import { create } from 'zustand'
 interface CartState {
   items: any[];
   addItem: (item: any) => void;
+  // 👇 1. Agregamos la definición para TypeScript
+  clearCart: () => void; 
 }
 
 export const useCartStore = create<CartState>((set) => ({
   items: [],
+  
   addItem: (newItem) => set((state) => {
     // Si el producto ya está en el carrito, sumamos 1 a la cantidad
     const existing = state.items.find((i: any) => i.id === newItem.id);
@@ -16,4 +19,7 @@ export const useCartStore = create<CartState>((set) => ({
     // Si es nuevo, lo agregamos con cantidad 1
     return { items: [...state.items, { ...newItem, quantity: 1 }] };
   }),
+
+  // 👇 2. Agregamos la función que vacía el arreglo de productos
+  clearCart: () => set({ items: [] }),
 }))
