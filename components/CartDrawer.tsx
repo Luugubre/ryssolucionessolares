@@ -70,7 +70,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               
               {/* Ambos métodos de pago disponibles en el panel lateral */}
               <div className="space-y-3">
-                <MercadoPagoButton totalAmount={totalPrice} />
+                {/* Le pasamos la lista de items en lugar de solo el total */}
+                <MercadoPagoButton items={items} />
                 <WebpayButton totalAmount={totalPrice} />
               </div>
             </div>
