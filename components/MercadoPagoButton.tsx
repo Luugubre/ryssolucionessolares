@@ -2,25 +2,26 @@
 
 import { useState } from 'react'
 
-export default function MercadoPagoButton({ totalAmount }: { totalAmount: number }) {
+// Cambiamos totalAmount por items
+export default function MercadoPagoButton({ items }: { items: any[] }) {
   const [loading, setLoading] = useState(false)
 
   const handlePay = async () => {
     setLoading(true)
     
-    const items = [
-      {
-        title: 'Servicio / Producto - R&S Soluciones Solares',
-        unit_price: Number(totalAmount),
-        quantity: 1,
-      }
-    ]
+    // Mapeamos los items reales del carrito
+    const formattedItems = items.map(item => ({
+      title: item.name || 'Producto R&S',
+      unit_price: Number(item.price),
+      quantity: Number(item.quantity),
+      id: String(item.id)
+    }))
 
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ items: formattedItems }),
       })
 
       const data = await res.json()
