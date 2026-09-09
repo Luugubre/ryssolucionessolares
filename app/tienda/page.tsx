@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase'
 import Image from 'next/image'
 import Link from 'next/link'
 import AddToCartButton from '@/components/AddToCartButton'
+import { Suspense } from 'react'
 
 interface Product {
   id: string
@@ -22,6 +23,7 @@ export default async function TiendaPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans py-16">
       <div className="max-w-7xl mx-auto px-8">
+
         <div className="mb-12">
           <span className="text-orange-600 font-bold text-xs uppercase tracking-widest block mb-2">Catálogo Completo</span>
           <h1 className="text-4xl font-extrabold text-[#0F172A] tracking-tight">
@@ -34,7 +36,7 @@ export default async function TiendaPage() {
             products.map((product: Product) => (
               <div key={product.id} className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
                 <div>
-                 
+                  
                  <div className="relative aspect-square w-full bg-slate-50 overflow-hidden">
   <Image 
     src={product.image_url || 'https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?q=80&w=600&auto=format&fit=crop'} 
