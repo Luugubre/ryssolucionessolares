@@ -1,25 +1,32 @@
 import { create } from 'zustand'
+// 1. Importamos la herramienta 'persist' de Zustand
+import { persist } from 'zustand/middleware'
 
 interface CartState {
   items: any[];
   addItem: (item: any) => void;
-  // 👇 1. Agregamos la definición para TypeScript
   clearCart: () => void; 
 }
 
-export const useCartStore = create<CartState>((set) => ({
-  items: [],
-  
-  addItem: (newItem) => set((state) => {
-    // Si el producto ya está en el carrito, sumamos 1 a la cantidad
-    const existing = state.items.find((i: any) => i.id === newItem.id);
-    if (existing) {
-      return { items: state.items.map((i: any) => i.id === newItem.id ? { ...i, quantity: i.quantity + 1 } : i) };
-    }
-    // Si es nuevo, lo agregamos con cantidad 1
-    return { items: [...state.items, { ...newItem, quantity: 1 }] };
-  }),
+// 2. Envolvemos la creación del store con persist()
+export const useCartStore = create<CartState>()(
+  persist(
+    (set) => ({
+      items: [],
+      
+      addItem: (newItem) => set((state) => {
+        const existing = state.items.find((i: any) => i.id === newItem.id);
+        if (existing) {
+          return { items: state.items.map((i: any) => i.id === newItem.id ? { ...i, quantity: i.quantity + 1 } : i) };
+        }
+        return { items: [...state.items, { ...newItem, quantity: 1 }] };
+      }),
 
-  // 👇 2. Agregamos la función que vacía el arreglo de productos
-  clearCart: () => set({ items: [] }),
-}))
+      clearCart: () => set({ items: [] }),
+    }),
+    {
+      // 3. Le damos un nombre único para guardarlo en el navegador
+      name: 'rs-soluciones-carrito', 
+    }
+  )
+)
