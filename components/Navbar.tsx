@@ -15,6 +15,7 @@ const navLinks = [
   { href: '/servicios', label: 'Servicios' },
   { href: '/tienda', label: 'Tienda' },
   { href: '/contacto', label: 'Contacto' },
+  { href: '/calculadora', label: 'Calculadora de gastos' },
 ]
 
 interface SearchResult {
