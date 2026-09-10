@@ -146,8 +146,7 @@ export default function CalculadoraPage() {
                         className={`absolute w-4 h-4 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300 flex items-center justify-center group cursor-pointer ${
                           isSelected ? 'bg-orange-500 scale-125 ring-4 ring-orange-500/30 z-30' : 'bg-slate-300 hover:bg-orange-400 z-10'
                         }`}
-                        style={{ top: `${reg.topPos ?? reg.y}%`, left: `${reg.x}%` }}
-                        title={reg.nombre}
+style={{ top: `${reg.y}%`, left: `${reg.x}%` }}                        title={reg.nombre}
                       >
                         <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : 'bg-slate-700'}`} />
                         
